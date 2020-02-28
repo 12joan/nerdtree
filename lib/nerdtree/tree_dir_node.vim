@@ -273,7 +273,7 @@ function! s:TreeDirNode._glob(pattern, all)
 
     " Construct a path specification such that globpath() will return
     " relative pathnames, if possible.
-    if self.path.str() ==# getcwd()
+    if self.path.str() ==# expand('%:p:h/')
         let l:pathSpec = ','
     else
         let l:pathSpec = escape(fnamemodify(self.path.str({'format': 'Glob'}), ':.'), ',')

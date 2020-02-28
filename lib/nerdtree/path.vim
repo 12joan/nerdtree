@@ -23,7 +23,7 @@ function! s:Path.AbsolutePathFor(pathStr)
     let l:result = a:pathStr
 
     if l:prependWorkingDir
-        let l:result = getcwd()
+        let l:result = expand('%:p:h/')
 
         if l:result[-1:] ==# s:Path.Slash()
             let l:result = l:result . a:pathStr
@@ -89,10 +89,10 @@ function! s:Path.changeToDir()
     try
         if g:NERDTreeUseTCD && exists(':tcd') ==# 2
             execute 'tcd ' . dir
-            call nerdtree#echo("Tab's CWD is now: " . getcwd())
+            call nerdtree#echo("Tab's CWD is now: " . expand('%:p:h/'))
         else
             execute 'cd ' . dir
-            call nerdtree#echo('CWD is now: ' . getcwd())
+            call nerdtree#echo('CWD is now: ' . expand('%:p:h/'))
         endif
     catch
         throw 'NERDTree.PathChangeError: cannot change CWD to ' . dir

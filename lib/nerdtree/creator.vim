@@ -243,11 +243,11 @@ function! s:Creator._pathForString(str)
     if g:NERDTreeBookmark.BookmarkExistsFor(a:str)
         let path = g:NERDTreeBookmark.BookmarkFor(a:str).path
     else
-        let dir = a:str ==# '' ? getcwd() : a:str
+        let dir = a:str ==# '' ? expand('%:p:h/') : a:str
 
         "hack to get an absolute path if a relative path is given
         if dir =~# '^\.'
-            let dir = getcwd() . g:NERDTreePath.Slash() . dir
+            let dir = expand('%:p:h/') . g:NERDTreePath.Slash() . dir
         endif
         let dir = g:NERDTreePath.Resolve(dir)
 

@@ -53,8 +53,8 @@ call s:initVariable('g:NERDTreeSortHiddenFirst', 1)
 call s:initVariable('g:NERDTreeUseTCD', 0)
 call s:initVariable('g:NERDTreeChDirMode', 0)
 call s:initVariable('g:NERDTreeCreatePrefix', 'silent')
-call s:initVariable('g:NERDTreeMinimalUI', 0)
-call s:initVariable('g:NERDTreeMinimalMenu', 0)
+call s:initVariable('g:NERDTreeMinimalUI', 1)
+call s:initVariable('g:NERDTreeMinimalMenu', 1)
 if !exists('g:NERDTreeIgnore')
     let g:NERDTreeIgnore = ['\~$']
 endif
@@ -225,13 +225,13 @@ endfunction
 
 function! NERDTreeCWD()
 
-    if empty(getcwd())
+    if empty(expand('%:p:h/'))
         call nerdtree#echoWarning('current directory does not exist')
         return
     endif
 
     try
-        let l:cwdPath = g:NERDTreePath.New(getcwd())
+        let l:cwdPath = g:NERDTreePath.New(expand('%:p:h/'))
     catch /^NERDTree.InvalidArgumentsError/
         call nerdtree#echoWarning('current directory does not exist')
         return

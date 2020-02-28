@@ -306,7 +306,7 @@ function! s:findAndRevealPath(pathStr) abort
 
     if !g:NERDTree.ExistsForTab()
         try
-            let l:cwd = g:NERDTreePath.New(getcwd())
+            let l:cwd = g:NERDTreePath.New(expand('%:p:h/'))
         catch /^NERDTree.InvalidArgumentsError/
             call nerdtree#echo('current directory does not exist.')
             let l:cwd = l:pathObj.getParent()
